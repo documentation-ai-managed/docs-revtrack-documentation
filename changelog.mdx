@@ -1,0 +1,150 @@
+---
+title: Changelog
+description: Track the evolution of RevTrack with our release notes, highlighting new features, improvements, and bug fixes across versions.
+---
+
+## Release History
+
+RevTrack evolves rapidly to deliver precise commission automation. You find detailed release notes below, organized by version. Each update includes new features that enhance your sales data integration, improvements for better performance, and bug fixes to ensure reliability.
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Real-time commission previews: View calculated commissions as sales data updates, without full recalculations.
+- Custom commission tiers: Define up to 5 tiers per salesperson with percentage-based rules.
+
+## Improvements
+
+- Faster data processing: Reduced calculation time by 40% for datasets over `1000` sales records.
+- Enhanced dashboard: Added export options for CSV and PDF commission reports.
+
+## Bug Fixes
+
+- Resolved sync issues with Salesforce integrations during peak hours.
+- Fixed rounding errors in multi-currency commission calculations.
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- API webhook support: Receive instant notifications on commission changes via your endpoint.
+- Role-based access: Assign view-only or admin permissions to team members.
+
+## Improvements
+
+- UI optimizations: Improved mobile responsiveness for commission tracking on the go.
+- Data validation: Automatic checks for duplicate sales entries before processing.
+
+## Bug Fixes
+
+- Corrected filter persistence when switching between salesperson views.
+- Patched security vulnerability in session handling (reported via our bug bounty program).
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Core commission engine: Automate calculations from CSV uploads or CRM integrations like HubSpot and Salesforce.
+- Salesperson dashboard: Track individual and team commissions with historical trends.
+
+## Breaking Changes
+
+- Updated config format: Migrate from XML to JSON for commission rules. See migration guide below.
+
+## Initial Setup
+
+Run this to update your rules file:
+
+<CodeGroup tabs="JSON,XML (Legacy)">
+```json
+{
+  "rules": [
+    {
+      "tier": 1,
+      "min_sales": 0,
+      "max_sales": 10000,
+      "rate": 0.05
+    }
+  ]
+}
+```
+```xml
+<!-- Legacy format - migrate to JSON -->
+<rules>
+  <tier min="0" max="10000" rate="5%"/>
+</rules>
+```
+</CodeGroup>
+
+</Update>
+
+## Upcoming Roadmap
+
+Stay ahead with these planned enhancements. You access early previews through our beta program.
+
+<Columns cols={3}>
+  <Card title="AI-Powered Forecasting" icon="trending-up" href="/docs/roadmap/ai-forecasting">
+    Predict future commissions based on sales trends.
+  </Card>
+  <Card title="Multi-Company Support" icon="users" href="/docs/roadmap/multi-company">
+    Manage commissions across multiple organizations.
+  </Card>
+  <Card title="Advanced Analytics" icon="bar-chart-3" href="/docs/roadmap/analytics">
+    Custom reports and visualizations.
+  </Card>
+</Columns>
+
+## Known Issues and Resolutions
+
+<Callout kind="alert">
+  Some users report delays in HubSpot sync for high-volume accounts (`>5000` records/day). Mitigation: Schedule syncs during off-peak hours. Full fix in v1.2.1.
+</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Migration Guide for v1.0.0" default-open="false">
+
+Follow these steps to update your commission rules:
+
+<Steps>
+  <Step title="Backup Existing Files" icon="database">
+    Copy your current `commissions.xml` to a safe location.
+  </Step>
+  <Step title="Convert to JSON" icon="file">
+    Use our converter tool:
+
+    ```bash
+    revtrack convert commissions.xml --output rules.json
+    ```
+  </Step>
+  <Step title="Test Rules" icon="play">
+    Upload sample sales data and verify calculations match expectations.
+  </Step>
+</Steps>
+
+  </Expandable>
+</ExpandableGroup>
+
+## Stay Updated
+
+Subscribe to notifications to never miss a release.
+
+<Tabs>
+  <Tab title="Email" icon="mail">
+    Enter your email at [revtrack.com/notifications](https://revtrack.com/notifications).
+  </Tab>
+  <Tab title="Slack" icon="message-circle">
+    Add our webhook:
+
+    ```
+    https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+    ```
+  </Tab>
+  <Tab title="RSS" icon="rss">
+    Feed: [revtrack.com/changelog.xml](https://revtrack.com/changelog.xml)
+  </Tab>
+</Tabs>
